@@ -13,10 +13,14 @@ const inputSlice = createSlice({
       return state.filter(input => input.id !== action.payload);
     },
     updateInput: (state, action) => {
-      const { id, placeholder } = action.payload;
+      const { id, title, placeholder, type } = action.payload;
       const existingInput = state.find(input => input.id === id);
+
       if (existingInput) {
-        existingInput.placeholder = placeholder;
+        // Apply updates only for provided fields
+        if (title !== undefined) existingInput.title = title;
+        if (placeholder !== undefined) existingInput.placeholder = placeholder;
+        if (type !== undefined) existingInput.type = type;
       }
     }
   }
@@ -24,3 +28,4 @@ const inputSlice = createSlice({
 
 export const { addInput, deleteInput, updateInput } = inputSlice.actions;
 export default inputSlice.reducer;
+

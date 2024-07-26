@@ -5,14 +5,21 @@ import inputOptions from '../../../../../data/inputOptions';
 import { useDispatch,useSelector } from 'react-redux';
 import { addInput } from '../../../../../slices/inputSlice';
 
+
 function ModalData( {setShowModal,setCurrentInput} ) {
     const dispatch = useDispatch();
-
+    const formData = useSelector(state => state.inputs);
+   
     const fieldTypeHander = (type) => {
+        // return when there are more than 20 inputs
+        if(formData.length > 20){
+            alert('Cannot Add More Than 20 Inputs');
+            return;
+        }
         // generate unique ID
         const uniqueId = Date.now();
         // dispatch the data to redux slice
-        dispatch(addInput({ id: uniqueId, type: type, placeholder: 'Click to Set', title: 'Add Title' }));
+        dispatch(addInput({ id: uniqueId, type: type, placeholder: '', title: '' }));
         // setting this as current slice so that customize section can render the input and placeholder
         setCurrentInput(uniqueId);
         // close the modal
