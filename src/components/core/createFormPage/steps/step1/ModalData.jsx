@@ -33,7 +33,7 @@ function ModalData( {setShowModal,setCurrentInput} ) {
                     key={item.id}
                     text={item.type}
                     children={<IoIosAddCircle />}
-                    customClasses={'capitalize flex items-center gap-2 text-white text-[16px] px-6 py-2 rounded-md font-semibold bg-[#14279B] hover:scale-95 transition-all duration-200'}
+                    customClasses={'w-fit capitalize flex items-center gap-2 text-white text-[16px] px-6 py-2 rounded-md font-semibold bg-black hover:scale-95 hover:bg-yellow-500 transition-all duration-200'}
                     onclick={() => fieldTypeHander(item.type)}
                 />
             ))}

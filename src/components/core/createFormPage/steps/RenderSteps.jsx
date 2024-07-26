@@ -6,21 +6,21 @@ import { FaCheck } from 'react-icons/fa';
 
 // required Components
 import SelectInputs from "./step1/SelectInputs";
+import FormStyler from "./step2/FormStyler";
 
 
 function RenderSteps() {
     const { step } = useSelector((state) => state.formSlice);
 
-
     // STEP's which will be rendered while Creating Form
     const steps = [
         {
             id: 1,
-            title: "Select Item",
+            title: "Add Items & Data",
         },
         {
             id: 2,
-            title: "Create Form",
+            title: "Style Form",
         },
         {
             id: 3,
@@ -52,7 +52,7 @@ function RenderSteps() {
 
 
                             <p
-                                className={`text-sm ${step >= item.id ? "text-black" : "text-richblack-500"
+                                className={`text-sm ${step >= item.id ? "text-richblack-5" : "text-richblack-500"
                                     }`}
                             >
                                 {item.title}
@@ -72,7 +72,7 @@ function RenderSteps() {
             </div>
             {/* Render specific component based on current step */}
             {step === 1 &&  <SelectInputs /> }
-            {/* {step === 2 &&  />} */} 
+            {step === 2 && <FormStyler />}  
             {/* {step === 3 && <PublishCourse />}  */}
         </div>
     )

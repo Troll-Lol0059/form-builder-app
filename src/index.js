@@ -12,6 +12,9 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './redux/index';
 
+// for Toast
+import { Toaster } from "react-hot-toast";
+
 const store = configureStore({
     reducer:rootReducer,
 })
@@ -21,6 +24,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <App />
+        <Toaster />
       </BrowserRouter>
     </Provider>
 );

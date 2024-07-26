@@ -16,12 +16,14 @@ function Homepage() {
 
   return (
     <div>
-      <section>
-        <h1>
+      <section className='p-8 my-4 text-center space-y-8'>
+        <h1 className='section_heading '>
           Welcome to Custom Form Builder Application
         </h1>
 
-        <p>Sample Text.........</p>
+        <p className='text-richblack-5 text-[1rem] font-medium'>
+          Please Choose a option to start your journey....
+        </p>
 
       </section>
 

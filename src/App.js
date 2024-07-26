@@ -9,7 +9,7 @@ import CreateForm from './pages/CreateForm';
 
 function App() {
   return (
-    <div className="w-screen min-h-screen flex flex-col font-inter">
+    <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path='/form/create' element={ <CreateForm /> } />

@@ -9,6 +9,7 @@
     "concurrently": "^8.2.2",
     "copy-to-clipboard": "^3.3.3",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-hot-toast": "^2.4.1",

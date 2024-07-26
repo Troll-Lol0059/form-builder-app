@@ -22,10 +22,11 @@ const inputSlice = createSlice({
         if (placeholder !== undefined) existingInput.placeholder = placeholder;
         if (type !== undefined) existingInput.type = type;
       }
-    }
+    },
+    resetInputs: () => initialState
   }
 });
 
-export const { addInput, deleteInput, updateInput } = inputSlice.actions;
+export const { addInput, deleteInput, updateInput,resetInputs } = inputSlice.actions;
 export default inputSlice.reducer;
 

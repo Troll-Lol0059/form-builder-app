@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     step: 1,
     editForm:false,
+    formTitle:'Untitled',
 }
 
 const formSlice= createSlice( {
@@ -11,6 +12,9 @@ const formSlice= createSlice( {
     reducers:{
         setStep: (state,action) => {
             state.step = action.payload
+        },
+        setFormHeading:(state,action) => {
+            state.formTitle = action.payload
         },
         setEditForm: (state,action) => {
             state.editForm = action.payload
@@ -25,6 +29,7 @@ const formSlice= createSlice( {
 export const {
     setStep,
     setEditForm,
+    setFormHeading,
 } = formSlice.actions
 
 export default formSlice.reducer;

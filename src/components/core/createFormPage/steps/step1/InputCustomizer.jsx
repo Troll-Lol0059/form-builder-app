@@ -2,6 +2,7 @@ import React, { useState,useRef, useEffect } from 'react'
 import { updateInput } from '../../../../../slices/inputSlice';
 import { useDispatch,useSelector } from 'react-redux';
 import { FaRegEdit , FaSave  } from "react-icons/fa";
+import { FcCancel } from "react-icons/fc";
 
 function InputCustomizer({ id }) {
     const dispatch = useDispatch();
@@ -38,7 +39,6 @@ function InputCustomizer({ id }) {
         payload.title = inputData.title;
         payload.placeholder = inputData.placeholder;
 
-        console.log(payload);
         if (payload.title || payload.placeholder) {
             dispatch(updateInput(payload));
         }
@@ -52,22 +52,17 @@ function InputCustomizer({ id }) {
             placeholder: currentInput?.placeholder || 'Click to Add Placeholder',
         })
     },[id])
-
     
     return (
         <div>
             <div>
-                {id}
-            </div>
-
-            <div>
-                <div>
+                <div className='w-full space-y-6'>
                     <div ref={labelRef} className="w-full">
                         <input type='text'
                          name='title'
                          value={inputData.title}
                          onChange={handleInputChange}
-                         className={`${editMode ? 'w-full rounded-lg p-2 border-b border-gray-300' : 'form-style2'}`}
+                         className={`${editMode ? 'form-styleEdit w-full' : 'form-style w-full'}`}
                          readOnly={editMode ? false : true }
                         />
                     </div>
@@ -77,21 +72,35 @@ function InputCustomizer({ id }) {
                          name='placeholder'
                          value={inputData.placeholder}
                          onChange={handleInputChange}
-                         className={`${editMode ? 'w-full rounded-lg p-2 border-b border-gray-300' : 'form-style2'}`}
+                         className={`${editMode ? 'form-styleEdit w-full' : 'form-style w-full'}`}
                          readOnly={editMode ? false : true }
                         />
                     </div>
 
-                    <div className='flex gap-2'>
+                    <div className='flex gap-8'>
                         {/* Edit Button */}
-                        <button onClick={() => setEditMode(true)}>Edit</button>
+                        <button onClick={() => setEditMode(true)} className='yellowButton flex items-center gap-3 font-normal'>
+                            <span><FaRegEdit /></span>
+                            <span>Edit</span>
+                        </button>
+
                         {/* Save Button */}
-                        <button onClick={() => handleSave() }>Save</button>
+                        <button onClick={() => handleSave() } className='yellowButton flex items-center gap-3 font-normal'>
+                            <span><FaSave /></span>
+                            <span>Save</span>
+                        </button>
+
+                        {
+                            // cancel Edit Button
+                            editMode &&(
+                                <button onClick={ () => setEditMode(null) } className='yellowButton flex items-center gap-2 font-normal'>
+                                    <span><FcCancel /></span>
+                                    <span>Cancel Edit</span>
+                                </button>
+                            )
+                        }
+
                     </div>
-                </div>
-
-                <div>
-
                 </div>
             </div>
 
