@@ -15,26 +15,31 @@ exports.getAllForms = async (req, res) => {
 // Create a new form
 exports.createForm = async (req, res) => {
     try {
-        const { formName, formComponents, status } = req.body;
+        const { title, formData, status } = req.body;
 
         // Create form components
-        const formComponentDocs = await FormComponents.insertMany(formComponents);
+        const formComponentDocs = await FormComponents.insertMany(formData);
 
         // Get the component IDs
         const formComponentIds = formComponentDocs.map(component => component._id);
 
         // Create the form with the component IDs
         const newForm = new Form({
-            formName,
+            formName:title,
             formComponents: formComponentIds,
             status
         });
 
         await newForm.save();
 
-        res.status(201).json(newForm);
+        return res.status(201).json(
+            {
+                success:true,
+                data:newForm,
+            }
+        );
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.message });
     }
 };
 
@@ -56,9 +61,12 @@ exports.editForm = async (req, res) => {
             { new: true }
         );
 
-        res.status(200).json(updatedForm);
+        return res.status(200).json({
+            success:true,
+            data:updatedForm,
+        });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.message });
     }
 };
 
@@ -79,8 +87,11 @@ exports.deleteForm = async (req, res) => {
         // Delete the form
         await Form.findByIdAndDelete(formId);
 
-        res.status(200).json({ message: 'Form and its components deleted successfully' });
+        return res.status(200).json({ 
+            success:true,
+            message: 'Form and its components deleted successfully' 
+        });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.message });
     }
 };

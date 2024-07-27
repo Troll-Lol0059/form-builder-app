@@ -1,5 +1,5 @@
 import { toast } from 'react-hot-toast';
-import apiConnector from './apiConnector';
+import { apiConnector } from '../apiConnector';
 import { formEndpoints } from '../apis';
 
 
@@ -21,6 +21,7 @@ export const getForms = async () => {
 };
 
 export const createForm = async (formData) => {
+  console.log(formData);
   const toastId = toast.loading("Creating...");
   let result = null;
   try {

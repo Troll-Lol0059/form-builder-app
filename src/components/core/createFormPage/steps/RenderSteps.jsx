@@ -7,6 +7,7 @@ import { FaCheck } from 'react-icons/fa';
 // required Components
 import SelectInputs from "./step1/SelectInputs";
 import FormStyler from "./step2/FormStyler";
+import PublishForm from "./step3/PublishForm";
 
 
 function RenderSteps() {
@@ -73,7 +74,7 @@ function RenderSteps() {
             {/* Render specific component based on current step */}
             {step === 1 &&  <SelectInputs /> }
             {step === 2 && <FormStyler />}  
-            {/* {step === 3 && <PublishCourse />}  */}
+            {step === 3 && <PublishForm />} 
         </div>
     )
 }
