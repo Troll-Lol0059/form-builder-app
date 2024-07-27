@@ -12,7 +12,8 @@ function App() {
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path='/form/create' element={ <CreateForm /> } />
+          <Route path='/form/create' element={ <CreateForm /> 
+        } />
           <Route path='*' element={<NotFound />} />
         </Routes>
     </div>

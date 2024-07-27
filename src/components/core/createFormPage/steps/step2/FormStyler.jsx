@@ -10,6 +10,7 @@ function FormStyler() {
     const dispatch = useDispatch();
 
     const formData = useSelector((state) => state.inputs);
+    console.log(formData);
     const title = useSelector((state) => state.formSlice).formTitle;
 
     // handles next button
