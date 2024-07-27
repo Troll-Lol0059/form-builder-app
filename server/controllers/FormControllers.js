@@ -6,7 +6,11 @@ const FormComponents = require('../model/FormComponents');
 exports.getAllForms = async (req, res) => {
     try {
         const forms = await Form.find().populate('formComponents');
-        res.status(200).json(forms);
+        return res.status(200).json({
+            success:true,
+            data:forms,
+            message:"Fetched Successfully",
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
