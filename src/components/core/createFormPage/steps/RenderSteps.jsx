@@ -21,7 +21,7 @@ function RenderSteps() {
         },
         {
             id: 2,
-            title: "Style Form",
+            title: "Preview Form",
         },
         {
             id: 3,

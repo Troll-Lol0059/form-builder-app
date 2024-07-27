@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path='/form/create' element={ <CreateForm />} />
+          <Route path='/form/:id/edit' element={ <CreateForm />} />
           <Route path='/forms' element={<ViewAllForms />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

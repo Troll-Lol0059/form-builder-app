@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    step: 1,
-    editForm:false,
-    formTitle:'Untitled',
+    step: JSON.parse(localStorage.getItem('step')) || 1,
+    editForm: JSON.parse(localStorage.getItem('editForm')) || false,
+    formTitle: localStorage.getItem('title') || 'Untitled',
 }
 
 const formSlice= createSlice( {

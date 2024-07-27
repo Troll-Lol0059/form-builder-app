@@ -4,9 +4,17 @@ import { getForms } from '../services/operations/courseDetailsAPI';
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { deleteForm } from '../services/operations/courseDetailsAPI';
+import { useNavigate } from 'react-router-dom';
+import { useSelector ,useDispatch} from 'react-redux';
+
 
 function ViewAllForms() {
   const [forms, setForms] = useState([]);
+  const formData = useSelector( (state) => state.inputs );
+  const step = useSelector( (state) => state.formSlice );
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // handler for Deleting a Form
   const deleteFormHandler = async (id) => {
@@ -19,6 +27,21 @@ function ViewAllForms() {
       console.log("DELETE_FORM_HANDLER ERROR............", error);
     }
   };
+
+  // handler for Editing a Form
+  const editFormHandler = async(id) => {
+    return;
+    if(!id) return;
+
+    const currentFormData = forms.filter( (item) => item._id === id  );
+
+    localStorage.setItem('step',1);
+    localStorage.setItem('title',currentFormData[0].formName);
+    localStorage.setItem('formData',JSON.stringify(currentFormData));
+
+    navigate(`/form/${id}/edit`)
+  };
+
 
   useEffect(() => {
     const fetchForms = async () => {
@@ -56,7 +79,10 @@ function ViewAllForms() {
                   <td className='p-2 border text-richblack-50'>{form.formName}</td>
                   <td className='p-2 border text-richblack-50'>{form.status}</td>
                   <td className='p-2 border text-richblack-50'>{new Date(form.createdAt).toLocaleString()}</td>
-                  <td className='p-2 border text-yellow-50 text-[1rem] cursor-pointer text-center'><FaRegEdit /></td>
+                  <td className='p-2 border text-yellow-50 text-[1rem] cursor-pointer text-center'
+                    onClick={() => editFormHandler(form._id)}>
+                    <FaRegEdit />
+                  </td>
                   <td className='p-2 border border-richblack-50 text-[red] text-[1rem] cursor-pointer text-center'
                     onClick={() => deleteFormHandler(form._id)}>
                     <MdDelete />

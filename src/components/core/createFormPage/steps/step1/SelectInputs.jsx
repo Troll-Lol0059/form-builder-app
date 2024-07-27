@@ -15,6 +15,9 @@ import IconBtn from '../../../../common/IconBtn';
 import InputCustomizer from './InputCustomizer';
 import FormActions from '../../../../common/FormActions';
 
+// required data
+import instructions from '../../../../../data/instructions';
+
 
 function SelectInputs() {
   const navigate = useNavigate();
@@ -22,7 +25,6 @@ function SelectInputs() {
 
   // Tracks formData
   const formData = useSelector(state => state.inputs);
-
   // Tracks form Title
   const title = useSelector((state) => state.formSlice).formTitle;
 
@@ -36,7 +38,6 @@ function SelectInputs() {
 
 
   // handler functions starts here
-
   // when clicked sets title to edit mode
   const handleTitleClick = () => {
     setIsEditingTitle(true);
@@ -158,6 +159,24 @@ function SelectInputs() {
               />
             )
           }
+        </div>
+
+        <div className='px-4'>
+          <div className='text-richblack-50 text-[1rem]'>
+            Instructions:
+          </div>
+
+          <ul className='text-richblack-100'>
+            {
+              instructions?.map( (item,index) =>(
+                <li key={item.id}>
+                  <span>{`${index+1}. `}</span>
+                  <span>{item.value}</span>
+                </li>
+              ) )
+            }
+          </ul>
+
         </div>
       </div>
 

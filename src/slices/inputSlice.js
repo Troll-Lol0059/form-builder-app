@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = [];
+const storedData = localStorage.getItem('formData');
+console.log(storedData);
+const initialState = storedData ? JSON.parse(storedData) : [];
 
 const inputSlice = createSlice({
   name: 'inputs',
