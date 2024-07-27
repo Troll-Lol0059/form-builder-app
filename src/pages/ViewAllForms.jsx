@@ -3,9 +3,22 @@ import { toast } from 'react-hot-toast';
 import { getForms } from '../services/operations/courseDetailsAPI';
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { deleteForm } from '../services/operations/courseDetailsAPI';
 
 function ViewAllForms() {
   const [forms, setForms] = useState([]);
+
+  // handler for Deleting a Form
+  const deleteFormHandler = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this form?");
+    if (!confirmDelete) return;
+    
+    try {
+      const response = await deleteForm(id);
+    } catch (error) {
+      console.log("DELETE_FORM_HANDLER ERROR............", error);
+    }
+  };
 
   useEffect(() => {
     const fetchForms = async () => {
@@ -44,7 +57,10 @@ function ViewAllForms() {
                   <td className='p-2 border text-richblack-50'>{form.status}</td>
                   <td className='p-2 border text-richblack-50'>{new Date(form.createdAt).toLocaleString()}</td>
                   <td className='p-2 border text-yellow-50 text-[1rem] cursor-pointer text-center'><FaRegEdit /></td>
-                  <td className='p-2 border border-richblack-50 text-[red] text-[1rem] cursor-pointer text-center'><MdDelete /></td>
+                  <td className='p-2 border border-richblack-50 text-[red] text-[1rem] cursor-pointer text-center'
+                    onClick={() => deleteFormHandler(form._id)}>
+                    <MdDelete />
+                  </td>
                 </tr>
               ))
             ) : (

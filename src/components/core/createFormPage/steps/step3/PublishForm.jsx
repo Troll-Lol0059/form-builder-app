@@ -2,7 +2,7 @@ import React from 'react'
 import toast from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 import { createForm } from '../../../../../services/operations/courseDetailsAPI';
-import { setFormHeading } from '../../../../../slices/steps';
+import { setFormHeading, setStep } from '../../../../../slices/steps';
 import { resetInputs } from '../../../../../slices/inputSlice';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,6 +30,7 @@ function PublishForm() {
         if (result) {
             // Reset form
             dispatch(resetInputs())
+            dispatch(setStep(1));
             dispatch(setFormHeading('Untitled'))
             navigate(-1);
             toast.success("Form created successfully");

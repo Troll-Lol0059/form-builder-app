@@ -93,7 +93,7 @@ exports.deleteForm = async (req, res) => {
 
         return res.status(200).json({ 
             success:true,
-            message: 'Form and its components deleted successfully' 
+            message: 'Form and its components deleted successfully',
         });
     } catch (error) {
         return res.status(400).json({ error: error.message });
