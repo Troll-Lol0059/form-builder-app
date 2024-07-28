@@ -63,7 +63,7 @@ export const editForm = async (formId, updatedFormData) => {
 export const deleteForm = async (formId) => {
   const toastId = toast.loading("Deleting...");
   try {
-    const response = await apiConnector("DELETE", formEndpoints.deleteForm(formId));
+    const response = await apiConnector("GET", formEndpoints.deleteForm(formId));
     if (!response?.data.success) {
       throw new Error("Could Not Delete Form");
     }
@@ -71,6 +71,24 @@ export const deleteForm = async (formId) => {
     toast.dismiss(toastId);
   } catch (error) {
     console.log("DELETE_FORM API ERROR............", error);
+    toast.error(error.message);
+    toast.dismiss(toastId);
+  }
+};
+
+
+export const fetchSingleForm = async (formId) => {
+  const toastId = toast.loading("Fetching...");
+  try {
+    const response = await apiConnector("GET", formEndpoints.getSingleForm(formId));
+    if (!response?.data.success) {
+      throw new Error("Could Not Fetch Form");
+    }
+    toast.success("Form Fetched Successfully");
+    toast.dismiss(toastId);
+    return response;
+  } catch (error) {
+    console.log("Fetch Single FORM API ERROR............", error);
     toast.error(error.message);
     toast.dismiss(toastId);
   }

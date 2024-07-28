@@ -47,6 +47,33 @@ exports.createForm = async (req, res) => {
     }
 };
 
+// FETCHES A SINGLE FORM FROM DB
+exports.getFormById = async (req, res) => {
+    try {
+        const {formId} = req.params;
+
+        // Validate formId
+        if (!formId) {
+            return res.status(400).json({ error: 'Form ID is required' });
+        }
+
+        // Fetch form data from the database
+        const formData = await Form.findById(formId).populate('formComponents');
+
+        // Check if the form exists
+        if (!formData) {
+            return res.status(404).json({ error: 'Form not found' });
+        }
+
+        return res.status(200).json({
+            success: true,
+            data: formData,
+        });
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
+    }
+};
+
 // Edit a form and its form components
 exports.editForm = async (req, res) => {
     try {

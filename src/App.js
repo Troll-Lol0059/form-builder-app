@@ -6,6 +6,7 @@ import Homepage from './pages/Homepage';
 import NotFound from './pages/NotFound';
 import CreateForm from './pages/CreateForm';
 import ViewAllForms from './pages/ViewAllForms';
+import EditCourse from './components/core/editCourse/EditCourse';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path='/form/create' element={ <CreateForm />} />
-          <Route path='/form/:id/edit' element={ <CreateForm />} />
+          <Route path='/form/:id/edit' element={ <EditCourse />} />
           <Route path='/forms' element={<ViewAllForms />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

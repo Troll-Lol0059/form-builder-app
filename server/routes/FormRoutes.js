@@ -5,6 +5,10 @@ const formController = require('../controllers/FormControllers');
 
 // Fetch all forms
 router.get('/', formController.getAllForms);
+
+// fetch single form
+router.get('/get/:formId',formController.getFormById);
+
 // Create a new form
 router.post('/create', formController.createForm);
 

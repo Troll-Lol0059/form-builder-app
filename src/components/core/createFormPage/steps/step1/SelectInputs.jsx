@@ -18,13 +18,12 @@ import FormActions from '../../../../common/FormActions';
 // required data
 import instructions from '../../../../../data/instructions';
 
-
 function SelectInputs() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const {editForm} = useSelector( (state) => state.formSlice );
   // Tracks formData
-  const formData = useSelector(state => state.inputs);
+  var formData = useSelector(state => state.inputs);
   // Tracks form Title
   const title = useSelector((state) => state.formSlice).formTitle;
 
@@ -35,7 +34,7 @@ function SelectInputs() {
   // set's form title and Edit FOrm Title
   const [formTitle, setFormTitle] = useState(title || '');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
-
+  const [data,setData] = useState(null);
 
   // handler functions starts here
   // when clicked sets title to edit mode
@@ -76,7 +75,16 @@ function SelectInputs() {
     toast.success('Input Deleted');
   }
 
+  if(editForm){
+    formData = null;
+  }
+
   useEffect(() => {
+    if(editForm){
+      setData(formData);
+      return;
+    }
+
     setShowModal({
       renderComponent: <ModalData setShowModal={setShowModal} setCurrentInput={setCurrentInput} />,
       btnText: 'X',
@@ -91,8 +99,7 @@ function SelectInputs() {
         <div className=''>
           <h4 className='text-richblack-5 font-bold text-center text-[20px] underline my-4'>Added Inputs</h4>
 
-
-          {formData.length === 0 &&<div className='text-[1rem] text-richblack-50'>Add Input to Show</div>}
+          {editForm ? (data?.length === 0) : (formData?.length === 0) &&<div className='text-[1rem] text-richblack-50'>Add Input to Show</div>}
 
           {formData?.map((item, index) => (
             <div key={item.id} onClick={() => inputsHandler(item.id)}
@@ -151,7 +158,7 @@ function SelectInputs() {
 
         <div>
           {
-            formData.length > 0 && (
+            formData?.length > 0 && (
               <FormActions btn1Text={'Back'}
                 btn2Text={'Next'}
                 btn1Handler={() => navigate(-1)}

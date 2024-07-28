@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
 import { getForms } from '../services/operations/courseDetailsAPI';
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { deleteForm } from '../services/operations/courseDetailsAPI';
 import { useNavigate } from 'react-router-dom';
-import { useSelector ,useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 function ViewAllForms() {
   const [forms, setForms] = useState([]);
-  const formData = useSelector( (state) => state.inputs );
-  const step = useSelector( (state) => state.formSlice );
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // handler for Deleting a Form
   const deleteFormHandler = async (id) => {
@@ -30,14 +26,7 @@ function ViewAllForms() {
 
   // handler for Editing a Form
   const editFormHandler = async(id) => {
-    return;
     if(!id) return;
-
-    const currentFormData = forms.filter( (item) => item._id === id  );
-
-    localStorage.setItem('step',1);
-    localStorage.setItem('title',currentFormData[0].formName);
-    localStorage.setItem('formData',JSON.stringify(currentFormData));
 
     navigate(`/form/${id}/edit`)
   };
